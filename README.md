@@ -1,6 +1,6 @@
 A set of bash scripts to deal with a MySQL database
 
-## INSATALLATION ##
+## INSTALLATION ##
 
 * clone repository:
 
@@ -12,8 +12,8 @@ A set of bash scripts to deal with a MySQL database
 
 * edit config file setting:
 	* db_source: name of the database to start comparison
-	* db_target: name of the database to be coompared to db_source
-	* user: MySQL user name
+	* db_target: name of the database to be compared to db_source
+	* user: MySQL user name into scripts
 	* password: MySQL user password
 	* host and port if needed
 
@@ -23,6 +23,6 @@ A set of bash scripts to deal with a MySQL database
 
 * `export.sh [database-name] [table-name]`: dumps a whole database or just a table if second argument provided
 
-* `import.sh -d [database-name] -f [path-to-dump-file]': imports a database from a dump file
+* `import.sh -d [database-name] -f [path-to-dump-file]`: imports a database from a dump file
 
-* 'create_objects.sh [object-1] [object-2] ...`: shows create sql for tables/views 
+* `create_objects.sh [object-1] [object-2] ...`: shows create sql for tables/views 
