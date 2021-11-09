@@ -4,7 +4,7 @@ A set of bash scripts to deal with a MySQL database
 
 * clone repository:
 
-`clone https://github.com/vukbgit/mysql-tools.git`
+`git clone https://github.com/vukbgit/mysql-tools.git`
 
 * setup config file:
 
