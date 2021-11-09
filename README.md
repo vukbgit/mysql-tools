@@ -1,8 +1,28 @@
-compare.sh: da lanciare per avere un'idea delle differenze, inaffidabile ovunque compaia il nome del database nella definizione dell'oggetto (foreign key, viste)
+A set of bash scripts to deal with a MySQL database
 
-export.sh [database-name] [table-name]
+## INSATALLATION ##
 
-import.sh -d [database-name] -f [path-to-dump-file]
+* clone repository:
 
-create_objects.sh [object-1] [object-2] ...
-    mostra l'SQL di creazione per tabelle e viste
+`clone https://github.com/vukbgit/mysql-tools.git`
+
+* setup config file:
+
+`cp .config.template .config`
+
+* edit config file setting:
+	* db_source: name of the database to start comparison
+	* db_target: name of the database to be coompared to db_source
+	* user: MySQL user name
+	* password: MySQL user password
+	* host and port if needed
+
+## SCRIPTS ##
+
+* `compare.sh`: makes a comparison using mysqldbcompare, unfortunately not useful for automatic datyabase synchronization
+
+* `export.sh [database-name] [table-name]`: dumps a whole database or just a table if second argument provided
+
+* `import.sh -d [database-name] -f [path-to-dump-file]': imports a database from a dump file
+
+* 'create_objects.sh [object-1] [object-2] ...`: shows create sql for tables/views 
