@@ -1,5 +1,5 @@
 #makes daily + monthly backup
-#USAGE: pass a DEVE|PROD parameter to force target db otherwise it wilòl be choosen by hand
+#USAGE: pass a DEV|PROD parameter to force target db otherwise it wilòl be choosen by hand
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $DIR/.config.sh
 #target
