@@ -1,21 +1,22 @@
 #!/bin/bash
-source ./.config
-while getopts d:f: option
-do
-    case "${option}"
-        in
-        d) db=${OPTARG};;
-        f) file="./"$OPTARG;;
-    esac
-done
-
-if [ -z $db ]; then
-    echo "use option -d to set database"
-elif [ -z $file ]; then
-    echo "use option -f to set file path"
-elif [ ! -f $file ]; then
-    echo "file does not exist"
-else
-    echo "restoring..."
-    mysql -u $user -p$password $db < $file
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $DIR/.config.sh
+#check file
+FILE=$1
+if [ -z $FILE ]; then
+    echo "dump file path to be restored must be passed as first parameter"
+    exit 1
 fi
+#target
+source $DIR/include/choose-target.sh
+#confirm choices
+echo "you choose to import file $FILE into $TARGET_DB"
+printf "is it ok? [y,N]"
+read ok
+ok="${ok:=n}"
+case $ok in
+  n) echo -e "${e1}let's do nothing, exiting${e2}";exit;;
+esac
+read -sp "MySQL root password: " ROOT_PWD
+echo "restoring..."
+mysql -u root -p$ROOT_PWD $TARGET_DB < $FILE

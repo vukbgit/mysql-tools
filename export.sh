@@ -1,18 +1,17 @@
+#!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $DIR/.config
-now=$(date +"%y%m%d_%H%M%S")
-db=$1
-table=$2
-file_path=$DIR"/dump/"$db
-if [ -z $db ]; then
-        echo "specify db as first parameter"
-else
-    if [ -z $table ]; then
-        echo "exporting db "$db
-	file=$file_path"_"$now".dump"
-    else
-        echo "exporting table "$db"."$table
-	file=$file_path"_"$table"_"$now".dump"
-    fi
-    mysqldump -u $user -p$password $db $table > $file
-fi
+source $DIR/.config.sh
+NOW=$(date +"%y%m%d_%H%M%S")
+#target
+source $DIR/include/choose-target.sh
+#optional table
+TABLE=$1
+FILE_PATH="$DIR/$DUMP_FOLDER/$TARGET_DB"
+  if [ -z $TABLE ]; then
+      echo "exporting db "$TARGET_DB
+FILE=$FILE_PATH"_"$NOW".dump"
+  else
+      echo "exporting table "$TARGET_DB"."$TABLE
+FILE=$FILE_PATH"_"$TABLE"_"$NOW".dump"
+  fi
+mysqldump -u $TARGET_USER -p$TARGET_PASSWORD $TARGET_DB $TABLE > $FILE
