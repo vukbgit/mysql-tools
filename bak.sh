@@ -1,3 +1,4 @@
+#!/bin/bash
 #makes daily + monthly backup
 #USAGE: pass a DEV|PROD parameter to force target db otherwise it wilòl be choosen by hand
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
