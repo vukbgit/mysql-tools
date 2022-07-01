@@ -17,6 +17,5 @@ ok="${ok:=n}"
 case $ok in
   n) echo -e "${e1}let's do nothing, exiting${e2}";exit;;
 esac
-read -sp "MySQL root password: " ROOT_PWD
 echo "restoring..."
-mysql -u root -p$ROOT_PWD $TARGET_DB < $FILE
+mysql -u $TARGET_USER -p$TARGET_PASSWORD $TARGET_DB < $FILE
