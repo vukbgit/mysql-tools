@@ -1,19 +1,14 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $DIR/.config.sh
-NOW=$(date +"%y%m%d_%H%M%S")
-#dump prod
-FILE_PATH="$DIR/$DUMP_FOLDER/$PROD_DB"
-      echo "exporting db "$PROD_DB
-FILE=$FILE_PATH"_"$NOW".dump"
-mysqldump -u $PROD_USER -p$PROD_PASSWORD $PROD_DB > $FILE
 #confirm choices
-echo "you choose to import file $FILE into $DEV_DB"
-printf "is it ok? [y,N]"
+echo "you choose to overwrite DEV database with PROD database"
+printf "are you sure? [y,N]"
 read ok
 ok="${ok:=n}"
 case $ok in
   n) echo -e "${e1}let's do nothing, exiting${e2}";exit;;
 esac
-echo "restoring..."
-mysql -u $DEV_USER -p$DEV_PASSWORD $DEV_DB < $FILE
+#dump dev & prod
+source $DIR/dump-dev-prod.sh
+echo "restoring $FILE_PROD..."
+mysql -u $DEV_USER -p$DEV_PASSWORD $DEV_DB < $FILE_PROD
